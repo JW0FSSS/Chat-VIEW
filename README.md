@@ -4,7 +4,7 @@ In Backend :
   
   segundo necesitas hacer un migrate de los modelos que esta en prisma
   
-  luego puedes hacer un pnpm node src/index.js
+  luego puedes levantar el servidor
 
 In Frontend:
 
