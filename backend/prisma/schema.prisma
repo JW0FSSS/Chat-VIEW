@@ -1,0 +1,34 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model User{
+  id Int @id @default(autoincrement())
+  from Message[] @relation("from")
+  to Message[] @relation("to")
+  name  String
+}
+
+model Message{
+  id Int @id @default(autoincrement())
+  from   User @relation("from",fields: [from_id],references: [id])
+  from_id Int
+  to  User @relation("to",fields: [to_id],references: [id])
+  to_id Int
+  message String
+  viewAt Boolean @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+}
